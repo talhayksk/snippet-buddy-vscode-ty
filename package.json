@@ -53,5 +53,8 @@
     "@types/vscode": "^1.85.0",
     "@vscode/test-electron": "^2.0.0",
     "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "snippet-buddy": "file:"
   }
 }
