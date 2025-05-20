@@ -1,0 +1,22 @@
+{
+	"compilerOptions": {
+	  "target": "es2019",          // ES2018+ AsyncIterable için gerekli
+	  "module": "commonjs",        // VS Code uzantılarında commonjs kullanılır
+	  "lib": [
+		"es2019",                 // AsyncIterable gibi modern özellikler için
+		"dom"                     // console gibi global objeler için
+	  ],
+	  "outDir": "out",
+	  "rootDir": "src",
+	  "strict": true,
+	  "sourceMap": true,
+	  "types": [
+		"node",                   // require, module, assert için
+		"mocha"                   // testlerde mocha kullanıyorsan
+	  ],
+	  "esModuleInterop": true,
+	  "skipLibCheck": true
+	},
+	"include": ["src"],
+	"exclude": ["node_modules", "**/*.test.ts"]
+  }
