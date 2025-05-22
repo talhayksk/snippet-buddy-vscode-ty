@@ -2,16 +2,45 @@
 
 Snippet Buddy, VS Code için basit ve hızlı kod snippet yönetimi sağlayan bir uzantıdır.
 
-- Kendi snippetlerinizi oluşturabilir ve kaydedebilirsiniz.
-- Snippetler listelenir ve önizlemesi yapılır.
-- Sağ tıklama menüsünden snippet ekleme özelliği vardır.
-
 ## Özellikler
 
-- Kolay snippet ekleme ve yönetme
-- Hızlı snippet listeleme
-- VS Code sağ tık menüsü entegrasyonu
+- ✨ Kolay snippet oluşturma ve kaydetme
+- 📝 Snippet başlığı, etiket ve açıklama ekleme
+- 🔍 Hızlı snippet arama ve listeleme
+- 🗑️ Tek tıkla snippet silme
+- 📌 Sağ tık menüsü entegrasyonu
 
 ## Kullanım
 
-Kodunuzu seçip sağ tıklayın, 'Snippet Ekle' seçeneği ile snippet oluşturabilirsiniz.
+### Snippet Ekleme
+1. Kaydetmek istediğiniz kodu seçin
+2. Sağ tıklayın ve "Snippet Ekle" seçeneğini seçin
+3. Başlık, etiket ve açıklama bilgilerini girin
+
+### Snippet Listeleme ve Kullanma
+1. `Ctrl+Shift+P` tuşlarına basın
+2. "Snippet Buddy: Snippet Listesi" komutunu seçin
+3. Listeden istediğiniz snippet'i seçin veya arayın
+4. Seçtiğiniz snippet otomatik olarak editöre eklenecektir
+
+### Snippet Silme
+- Snippet listesinde her kaydın sağında bulunan 🗑️ ikonuna tıklayarak silebilirsiniz
+- Silme işlemi için onay istenecektir
+
+## Komutlar
+
+- `Snippet Buddy: Snippet Ekle` - Yeni snippet oluşturur
+- `Snippet Buddy: Snippet Listesi` - Kaydedilen snippetleri listeler
+- `Snippet Buddy: Snippet Ekle (Sağ tık)` - Sağ tık menüsünden snippet ekleme
+
+## Gereksinimler
+
+- VS Code 1.60.0 veya üzeri
+
+## Katkıda Bulunma
+
+Bu proje açık kaynaklıdır. Her türlü katkıya açığız!
+
+## Lisans
+
+MIT

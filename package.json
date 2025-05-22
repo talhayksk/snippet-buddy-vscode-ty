@@ -3,7 +3,7 @@
   "publisher": "tyuksek",
   "displayName": "Snippet Buddy",
   "description": "Kod parçacıklarını kolayca kaydet ve tekrar kullan",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "repository": "https://github.com/talhayksk/snippet-buddy-vscode-ty",
   "icon": "logo.png",
   "engines": {

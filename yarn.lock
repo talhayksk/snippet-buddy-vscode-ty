@@ -234,7 +234,7 @@ signal-exit@^4.1.0:
   integrity sha512-bzyZ1e88w9O1iNJbKnOlvYTrWPDl46O1bG0D3XInv+9tkPrxrN8jUUTiFlDkkmKWgn1M6CfIA13SuGqOa9Korw==
 
 "snippet-buddy@file:":
-  version "1.0.2"
+  version "1.1.0"
   resolved "file:"
   dependencies:
     snippet-buddy "file:"

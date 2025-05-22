@@ -20,7 +20,8 @@ export function activate(context: vscode.ExtensionContext) {
 	context.subscriptions.push(
 		vscode.commands.registerCommand('snippetBuddy.saveSnippet', saveSnippet),
 		vscode.commands.registerCommand('snippetBuddy.insertSnippet', insertSnippet),
-		vscode.commands.registerCommand('snippetBuddy.listSnippets', listSnippets)
+		vscode.commands.registerCommand('snippetBuddy.listSnippets', listSnippets),
+		
 	);
 }
 
@@ -68,31 +69,64 @@ function getSnippets() {
 }
 
 async function listSnippets() {
-	const snippets = getSnippets();
-	if (snippets.length === 0) {
-		vscode.window.showInformationMessage("Hiç snippet kaydedilmemiş.");
-		return;
-	}
+    const snippets = getSnippets();
+    if (snippets.length === 0) {
+        vscode.window.showInformationMessage("Hiç snippet kaydedilmemiş.");
+        return;
+    }
 
-	const items = snippets.map((s: any) => {
-		const previewLine = s.code.split('\n')[0]?.trim().slice(0, 40) || '(boş)';
-		return {
-			label: s.title,
-			description: previewLine,
-			detail: s.description || '',
-			snippet: s
-		};
-	});
+    const quickPick = vscode.window.createQuickPick();
+    quickPick.items = snippets.map((s: any, index: number) => {
+        const previewLine = s.code.split('\n')[0]?.trim().slice(0, 40) || '(boş)';
+        return {
+            label: `$(code) ${s.title}`,
+            description: previewLine,
+            detail: s.description || '',
+            buttons: [{ 
+                iconPath: new vscode.ThemeIcon("trash"),
+                tooltip: "Sil"
+            }],
+            snippet: s,
+            index: index
+        };
+    });
 
-	const picked = await vscode.window.showQuickPick(items, {
-		placeHolder: 'Bir snippet seçin',
-		matchOnDescription: true,
-		matchOnDetail: true
-	}) as any;
+    quickPick.onDidTriggerItemButton(async ({item}) => {
+        const snippetItem = item as any;
+        const confirm = await vscode.window.showWarningMessage(
+            `'${snippetItem.snippet.title}' snippet'ini silmek istediğinize emin misiniz?`,
+            'Evet', 'Hayır'
+        );
 
-	if (picked && vscode.window.activeTextEditor) {
-		vscode.window.activeTextEditor.insertSnippet(new vscode.SnippetString(picked.snippet.code));
-	}
+        if (confirm === 'Evet') {
+            snippets.splice(snippetItem.index, 1);
+            fs.writeFileSync(snippetStoragePath, JSON.stringify(snippets, null, 2));
+            vscode.window.showInformationMessage(`'${snippetItem.snippet.title}' snippet'i silindi.`);
+            quickPick.items = snippets.map((s: any, index: number) => ({
+                label: `$(code) ${s.title}`,
+                description: s.code.split('\n')[0]?.trim().slice(0, 40) || '(boş)',
+                detail: s.description || '',
+                buttons: [{ 
+                    iconPath: new vscode.ThemeIcon("trash"),
+                    tooltip: "Sil"
+                }],
+                snippet: s,
+                index: index
+            }));
+        }
+    });
+
+    quickPick.onDidChangeSelection(selection => {
+        const selected = selection[0] as any;
+        if (selected && vscode.window.activeTextEditor) {
+            vscode.window.activeTextEditor.insertSnippet(
+                new vscode.SnippetString(selected.snippet.code)
+            );
+            quickPick.dispose();
+        }
+    });
+
+    quickPick.show();
 }
 
 async function insertSnippet() {
